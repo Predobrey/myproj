@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    ul{list-style: none;
+    display: flex;
+    }
+
+    a{
+        padding: 16px;
+        text-decoration: none;
+        background:#41aedc;
+        color: white;
+        
+    }
+
+    a:hover { background: #fd9c10;
+    }
+
+</style>
+
+</head>
+<body>
+    <h2>Создать меню</h2>
+    <form name="formMenu">
+        <p>Пункты меню: <input type="text" size="50" name="elemMenu" value="Главная, О компании, Новости"></p>
+        <p>Цвет текста: <input type="color" name="fColor" value="#ffffff"></p>
+        <p>Цвет фона: <input type="color" name="bColor" value="#41aedc"></p>
+        <p>Цвет hover: <input type="color" size="50" name="hColor" value="#fd9c10"></p>
+
+
+        <p><input type="button" name="but" value="Создать меню" onclick="menu()">
+        <span id="del"></span>
+        </p>
+    </form>
+    <style id="myStyle"></style>
+
+    <p id="myMenu"></p>
+    <div id="big"></div>
+
+    <script>
+    function menu()    {
+
+        let elemMenu = formMenu.elemMenu.value;
+        let fc = formMenu.fColor.value;
+        let bc = formMenu.bColor.value;
+        let hc = formMenu.hColor.value;
+
+        // alert(`${elemMenu}, ${fc}, ${bc}, ${hc}`)
+        let arrMenu = elemMenu.split(', ');
+        let s = "", s1 = "", s2 = "", myList = "";
+        for(i=0; i<arrMenu.length; i++){
+            s += `<li onclick = "bigp(${i+1})"><a href="#">${arrMenu[i]}</a></li>`;
+        }
+        myList = `<ul>${s}</ul>`;
+                s1 = `
+                a {
+        background: ${bc};
+        color: ${fc};
+        }
+        a:hover {
+            background: ${hc};
+        }
+        
+                `;
+                myStyle.innerHTML = s1;
+        myMenu.innerHTML = myList;
+
+        formMenu.but.value = 'Изменить меню';
+        del.innerHTML = `<input type = "button" value = "Удалить меню" onclick = "delet()">`;
+        
+        
+        
+    }
+    function delet(){
+            myMenu.innerHTML = '';
+            formMenu.but.value = "Создать меню";
+            big.innerHTML = '';
+            del.innerHTML = '';
+
+        }
+
+
+        function bigp(p){
+
+            s2  = `<img onclick = "big.innerHTML =''" src = images/${p}.jpg>`
+            big.innerHTML = s2;
+        }
+
+    </script>
+
+    <!--  <ul>
+         <li><a href="#">Главная</a></li>
+         <li><a href="#">О компании</a></li>
+         <li><a href="#">Новости</a></li>
+     </ul> -->
+
+
+    
+</body>
+</html>
